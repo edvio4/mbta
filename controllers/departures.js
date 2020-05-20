@@ -1,16 +1,10 @@
 const departuresRouter = require('express').Router();
-const axios = require('axios');
-const config = require('../utils/config');
+const departuresService = require('../services/departures-service');
 
 departuresRouter.get('/', async (request, response) => {
+    const departures = await departuresService.getMbtaDepartures();
 
-    const departures = await axios.get(config.MBTA_URI, {
-        headers: {
-            Authorization: config.MBTA_API_KEY
-        }
-    });
-
-    response.json(departures.data);
+    response.json(departures);
 });
 
 module.exports = departuresRouter;
