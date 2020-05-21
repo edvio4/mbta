@@ -23,7 +23,7 @@ let getMbtaDepartures = async function getMbtaDepartures(station) {
             'X-API-Key': config.MBTA_API_KEY
         }
     });
-    console.log(mbtaData)
+
     return mapper.mapDepartures(mbtaData.data);
 };
 
