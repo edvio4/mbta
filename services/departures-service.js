@@ -20,10 +20,10 @@ let getMbtaDepartures = async function getMbtaDepartures(station) {
     const mbtaData = await axios.get(url, {
         params: params,
         headers: {
-            Authorization: config.MBTA_API_KEY
+            'X-API-Key': config.MBTA_API_KEY
         }
     });
-
+    console.log(mbtaData)
     return mapper.mapDepartures(mbtaData.data);
 };
 
