@@ -29,7 +29,7 @@ let mapDepartures = function mapDepartures(data) {
 
         const departure = {
             carrier: 'MBTA',
-            departureTime: schedules[scheduleId].departure_time,
+            departureTime: prediction.attributes.departure_time === null ? schedules[scheduleId].departure_time : prediction.attributes.departure_time,
             destination: trips[tripId].headsign,
             trainNumber: trips[tripId].name,
             trackNumber: stops[stopId].platform_code,
