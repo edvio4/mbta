@@ -2,15 +2,23 @@ const axios = require('axios');
 const config = require('../utils/config');
 const mapper = require('../mappers/mbta-mapper');
 
-let getMbtaDepartures = async function getMbtaDepartures() {
+const railRouteType = 2;
+const outboundDirection = 0;
+
+let getMbtaDepartures = async function getMbtaDepartures(station) {
+    let params = {
+        include: 'trip,schedule,stop',
+        'filter[direction_id]': outboundDirection,
+        'filter[route_type]': railRouteType
+    };
+
+    if (station) {
+        params['filter[stop]'] = station;
+    }
+
     const url = 'https://api-v3.mbta.com/predictions';
     const mbtaData = await axios.get(url, {
-        params: {
-            include: 'trip,schedule,stop',
-            'filter[direction_id]': 0,
-            'filter[route_type]': 2,
-            'filter[stop]': 'place-north'
-        },
+        params: params,
         headers: {
             Authorization: config.MBTA_API_KEY
         }

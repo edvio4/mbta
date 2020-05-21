@@ -1,5 +1,5 @@
 let mapDepartures = function mapDepartures(data) {
-    if (!data.length) return [];
+    if (!data.data || !data.data.length) return [];
 
     let departures = [];
     let predictions = {};
